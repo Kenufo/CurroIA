@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kenufo.github.io/CurroIA/sitemap.xml
