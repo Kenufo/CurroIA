@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CurroIA | Herramientas laborales gratis</title>
+<meta name="description" content="Calcula sueldo, finiquito, vacaciones y horas extra. Crea CV y emails laborales.">
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,sans-serif;background:#f6f7fb;color:#171923}header{background:#171923;color:#fff;padding:20px 6%;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:5}.logo{font-size:25px;font-weight:900}.tag{opacity:.75;font-size:13px}.hero{max-width:1100px;margin:auto;padding:65px 6% 35px}.hero h1{font-size:clamp(40px,7vw,70px);line-height:.98;margin:0 0 18px}.hero p{font-size:19px;color:#5f6574;max-width:680px}.grid{max-width:1100px;margin:0 auto 55px;padding:0 6%;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}.card{background:#fff;border:1px solid #e3e5ec;border-radius:18px;padding:23px;box-shadow:0 10px 35px #00000009}.card h2{margin:7px 0 8px}.card p{color:#62697a}.icon{font-size:30px}button{background:#171923;color:#fff;border:0;border-radius:10px;padding:12px 17px;font-weight:750;cursor:pointer}input,textarea,select{width:100%;padding:12px;border:1px solid #d7dae4;border-radius:10px;margin:6px 0 12px;font:inherit}.tool{display:none}.tool.active{display:block}.result{background:#f0f2f7;border-radius:12px;padding:15px;margin-top:12px;white-space:pre-wrap}.notice{font-size:12px;color:#747b89}.wide{grid-column:1/-1}footer{text-align:center;background:#fff;padding:35px;color:#777}
+</style>
+</head>
+<body>
+<header><div class="logo">CurroIA</div><div class="tag">Herramientas laborales gratis</div></header>
+<section class="hero"><h1>Trabaja mejor.<br>Calcula. Crea.</h1><p>Herramientas sencillas para trabajadores y personas que buscan empleo en España.</p></section>
+
+<section class="grid">
+<div class="card"><div class="icon">💰</div><h2>Sueldo neto</h2><p>Estimación orientativa desde tu salario bruto.</p><button onclick="show('salary')">Calcular</button></div>
+<div class="card"><div class="icon">🧾</div><h2>Finiquito</h2><p>Estimación de salario pendiente, vacaciones y pagas extra.</p><button onclick="show('finiquito')">Calcular</button></div>
+<div class="card"><div class="icon">🏖️</div><h2>Vacaciones</h2><p>Calcula días generados según fechas trabajadas.</p><button onclick="show('vacaciones')">Calcular</button></div>
+<div class="card"><div class="icon">⏱️</div><h2>Horas extra</h2><p>Calcula el valor aproximado de tus horas adicionales.</p><button onclick="show('extras')">Calcular</button></div>
+<div class="card"><div class="icon">📄</div><h2>CV con IA</h2><p>Genera un borrador profesional con tus datos.</p><button onclick="show('cv')">Crear CV</button></div>
+<div class="card"><div class="icon">✉️</div><h2>Email laboral</h2><p>Redacta mensajes para RRHH de forma profesional.</p><button onclick="show('email')">Redactar</button></div>
+</section>
+
+<section class="grid">
+<article id="salary" class="card tool"><h2>💰 Sueldo neto</h2>
+<label>Bruto mensual (€)</label><input id="gross" type="number" placeholder="1750">
+<label>IRPF aproximado (%)</label><input id="tax" type="number" value="10" step=".1">
+<button onclick="salary()">Calcular</button><div id="salaryResult" class="result"></div><p class="notice">Estimación simplificada; el salario real depende de cotizaciones, IRPF, situación personal y convenio.</p></article>
+
+<article id="finiquito" class="card tool"><h2>🧾 Finiquito orientativo</h2>
+<label>Salario bruto mensual (€)</label><input id="fgross" type="number" placeholder="1750">
+<label>Días de salario pendientes</label><input id="fdays" type="number" value="0">
+<label>Días de vacaciones pendientes</label><input id="fholiday" type="number" value="0">
+<label>Días de paga extra pendientes</label><input id="fextra" type="number" value="0">
+<button onclick="finiquito()">Calcular</button><div id="fResult" class="result"></div><p class="notice">No incluye indemnización por despido ni todos los posibles conceptos legales.</p></article>
+
+<article id="vacaciones" class="card tool"><h2>🏖️ Vacaciones generadas</h2>
+<label>Días anuales de vacaciones</label><input id="annual" type="number" value="30">
+<label>Meses completos trabajados este año</label><input id="months" type="number" value="6" min="0" max="12">
+<button onclick="vacaciones()">Calcular</button><div id="vResult" class="result"></div><p class="notice">Cálculo proporcional orientativo. El convenio/contrato puede establecer condiciones concretas.</p></article>
+
+<article id="extras" class="card tool"><h2>⏱️ Horas extra</h2>
+<label>Salario bruto mensual (€)</label><input id="egross" type="number" placeholder="1750">
+<label>Horas ordinarias mensuales</label><input id="hours" type="number" value="160">
+<label>Número de horas extra</label><input id="ehours" type="number" value="5">
+<button onclick="extras()">Calcular</button><div id="eResult" class="result"></div><p class="notice">Valor base aproximado; la compensación puede depender del convenio y del acuerdo aplicable.</p></article>
+
+<article id="cv" class="card tool wide"><h2>📄 Generador de CV</h2>
+<label>Nombre</label><input id="name" placeholder="Tu nombre">
+<label>Puesto objetivo</label><input id="job" placeholder="Ej. Recepcionista de hotel">
+<label>Experiencia</label><textarea id="exp" rows="4" placeholder="Empresa, puesto, años y funciones..."></textarea>
+<label>Formación</label><input id="edu" placeholder="Estudios, cursos...">
+<label>Idiomas</label><input id="langs" placeholder="Español, inglés, catalán...">
+<button onclick="cv()">Generar borrador</button><div id="cvResult" class="result"></div></article>
+
+<article id="email" class="card tool wide"><h2>✉️ Email laboral</h2>
+<label>Situación</label><select id="situation"><option>Nómina incorrecta</option><option>Solicitar vacaciones</option><option>Reclamar horas extra</option><option>Solicitar información a RRHH</option><option>Renuncia</option></select>
+<label>Contexto</label><textarea id="context" rows="4" placeholder="Explica brevemente la situación..."></textarea>
+<button onclick="email()">Generar email</button><div id="emailResult" class="result"></div></article>
+</section>
+<footer>© 2026 CurroIA · Información orientativa, no asesoramiento laboral, fiscal o jurídico.</footer>
+
+<script>
+function show(id){document.querySelectorAll('.tool').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.getElementById(id).scrollIntoView({behavior:'smooth'})}
+function salary(){let g=+gross.value||0,t=+tax.value||0,ss=g*.0635,irpf=g*t/100;salaryResult.textContent=`Neto estimado: ${(g-ss-irpf).toFixed(2)} € / mes\n\nBruto: ${g.toFixed(2)} €\nSeguridad Social estimada: ${ss.toFixed(2)} €\nIRPF: ${irpf.toFixed(2)} €`}
+function finiquito(){let g=+fgross.value||0,d=+fdays.value||0,v=+fholiday.value||0,x=+fextra.value||0,day=g/30,total=day*(d+v+x);fResult.textContent=`Finiquito orientativo: ${total.toFixed(2)} €\n\nSalario pendiente: ${(day*d).toFixed(2)} €\nVacaciones pendientes: ${(day*v).toFixed(2)} €\nPaga extra pendiente (simplificada): ${(day*x).toFixed(2)} €`}
+function vacaciones(){let a=+annual.value||30,m=+months.value||0,v=a*m/12;vResult.textContent=`Vacaciones generadas: ${v.toFixed(2)} días\n\nFórmula: ${a} × ${m}/12`}
+function extras(){let g=+egross.value||0,h=+hours.value||160,n=+ehours.value||0,rate=g/h;eResult.textContent=`Valor base por hora: ${rate.toFixed(2)} €\n\n${n} horas extra ≈ ${(rate*n).toFixed(2)} € brutos`}
+function cv(){let n=name.value||'TU NOMBRE',j=job.value||'PUESTO OBJETIVO',e=exp.value||'Experiencia profesional',ed=edu.value||'Formación',l=langs.value||'Idiomas';cvResult.textContent=`${n.toUpperCase()}\n${j}\n\nPERFIL PROFESIONAL\nProfesional orientado a resultados, con experiencia relevante para el puesto de ${j}.\n\nEXPERIENCIA\n${e}\n\nFORMACIÓN\n${ed}\n\nIDIOMAS\n${l}\n\nHABILIDADES\nAtención al cliente · Organización · Comunicación · Trabajo en equipo`}
+function email(){let s=situation.value,c=context.value;emailResult.textContent=`Asunto: ${s}\n\nHola,\n\nMe pongo en contacto con vosotros en relación con ${s.toLowerCase()}.\n\n${c||'Quisiera solicitar información y que se revise mi situación.'}\n\nAgradecería que pudierais revisarlo y confirmarme los próximos pasos.\n\nMuchas gracias.\nUn saludo,`}
+</script>
+</body></html>
