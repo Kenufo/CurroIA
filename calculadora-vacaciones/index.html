@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Calculadora de vacaciones 2026 | CurroIA</title>
+<meta name="description" content="Calcula cuántos días de vacaciones te corresponden de forma orientativa en España. Calculadora gratuita de CurroIA.">
+<style>
+body{font-family:Arial;margin:0;background:#f4f7fb;color:#172033}
+header{background:#173b6c;color:white;text-align:center;padding:25px}
+main{max-width:700px;margin:25px auto;padding:15px}
+.card{background:white;padding:22px;border-radius:15px;margin-bottom:20px}
+input,button{width:100%;box-sizing:border-box;padding:13px;margin:8px 0 15px;border-radius:8px;border:1px solid #ccc;font-size:16px}
+button{background:#1769d1;color:white;border:0;font-weight:bold}
+#resultado{display:none;background:#eef6ff;padding:18px;border-radius:10px}
+.grande{font-size:30px;font-weight:bold;color:#1769d1}
+a{color:#1769d1}
+</style>
+</head>
+<body>
+
+<header>
+<h1>CurroIA</h1>
+<p>Calculadora de vacaciones en España</p>
+</header>
+
+<main>
+
+<div class="card">
+<h2>¿Cuántos días de vacaciones te corresponden?</h2>
+<p>Calcula de forma orientativa tus vacaciones según los meses trabajados.</p>
+
+<label>Días de vacaciones al año</label>
+<input id="anuales" type="number" value="30">
+
+<label>Meses trabajados este año</label>
+<input id="meses" type="number" placeholder="Ej. 6" min="0" max="12">
+
+<button onclick="calcular()">CALCULAR VACACIONES</button>
+
+<div id="resultado">
+<p>Vacaciones generadas:</p>
+<div class="grande" id="dias"></div>
+<p id="detalle"></p>
+</div>
+</div>
+
+<div class="card">
+<h2>¿Cómo se calculan?</h2>
+<p>En España, las vacaciones se generan proporcionalmente al tiempo trabajado. El mínimo legal es de 30 días naturales al año, aunque algunos convenios pueden establecer condiciones diferentes.</p>
+<p>Esta herramienta ofrece una estimación orientativa y no sustituye la consulta del contrato o convenio colectivo aplicable.</p>
+</div>
+
+<div class="card">
+<h2>Más herramientas de CurroIA</h2>
+<p><a href="../">← Volver a CurroIA</a></p>
+<p><a href="../calculadora-sueldo/">💰 Calculadora de sueldo neto</a></p>
+<p><a href="../calculadora-finiquito/">📄 Calculadora de finiquito</a></p>
+<p><a href="../privacidad.html">Política de privacidad</a></p>
+</div>
+
+</main>
+
+<script>
+function calcular(){
+let anuales=Number(document.getElementById("anuales").value);
+let meses=Number(document.getElementById("meses").value);
+
+if(meses<0||meses>12){
+alert("Introduce entre 0 y 12 meses.");
+return;
+}
+
+let dias=anuales*meses/12;
+
+document.getElementById("dias").textContent=dias.toFixed(1)+" días";
+document.getElementById("detalle").textContent="Cálculo orientativo: "+anuales+" días anuales × "+meses+" meses ÷ 12.";
+document.getElementById("resultado").style.display="block";
+}
+</script>
+
+</body>
+</html>
