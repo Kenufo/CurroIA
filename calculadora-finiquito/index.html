@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Calculadora de finiquito 2026 | CurroIA</title>
+<meta name="description" content="Calcula de forma orientativa tu finiquito en España. Incluye salario pendiente, vacaciones no disfrutadas y pagas extra.">
+<style>
+body{font-family:Arial;margin:0;background:#f4f7fb;color:#172033}
+header{background:#173b6c;color:white;text-align:center;padding:25px}
+main{max-width:700px;margin:25px auto;padding:15px}
+.card{background:white;padding:22px;border-radius:15px;margin-bottom:20px}
+input,button{width:100%;box-sizing:border-box;padding:13px;margin:8px 0 15px;border-radius:8px;border:1px solid #ccc;font-size:16px}
+button{background:#1769d1;color:white;border:0;font-weight:bold}
+#resultado{display:none;background:#eef6ff;padding:18px;border-radius:10px}
+.grande{font-size:30px;font-weight:bold;color:#1769d1}
+a{color:#1769d1}
+</style>
+</head>
+<body>
+<header><h1>CurroIA</h1><p>Calculadora de finiquito en España</p></header>
+<main>
+<div class="card">
+<h2>Calcula tu finiquito</h2>
+<p>Introduce tus datos para obtener una estimación orientativa.</p>
+
+<label>Salario bruto mensual (€)</label>
+<input id="salario" type="number" placeholder="Ej. 1800">
+
+<label>Días trabajados del último mes</label>
+<input id="dias" type="number" placeholder="Ej. 15">
+
+<label>Días de vacaciones pendientes</label>
+<input id="vacaciones" type="number" placeholder="Ej. 8">
+
+<label>Pagas extra pendientes (€)</label>
+<input id="extras" type="number" placeholder="Ej. 500">
+
+<button onclick="calcular()">CALCULAR FINIQUITO</button>
+
+<div id="resultado">
+<p>Finiquito estimado:</p>
+<div class="grande" id="total"></div>
+<p id="detalle"></p>
+</div>
+</div>
+
+<div class="card">
+<h2>¿Qué incluye el finiquito?</h2>
+<p>El finiquito puede incluir salario pendiente, vacaciones generadas y no disfrutadas, parte proporcional de pagas extraordinarias y otros conceptos pendientes.</p>
+<p>Esta calculadora ofrece una estimación simplificada. El importe real depende del contrato, convenio, nómina y circunstancias de la relación laboral.</p>
+</div>
+
+<div class="card">
+<h2>CurroIA</h2>
+<p><a href="../">← Volver a CurroIA</a></p>
+<p><a href="../calculadora-sueldo/">💰 Calculadora de sueldo neto</a></p>
+<p><a href="../privacidad.html">Política de privacidad</a></p>
+</div>
+</main>
+
+<script>
+function calcular(){
+let salario=Number(document.getElementById("salario").value);
+let dias=Number(document.getElementById("dias").value);
+let vacaciones=Number(document.getElementById("vacaciones").value);
+let extras=Number(document.getElementById("extras").value);
+
+if(!salario){alert("Introduce tu salario mensual.");return}
+
+let diario=salario/30;
+let pendiente=diario*dias;
+let vac=diario*vacaciones;
+let total=pendiente+vac+extras;
+
+document.getElementById("total").textContent=total.toLocaleString("es-ES",{style:"currency",currency:"EUR"});
+document.getElementById("detalle").textContent="Salario pendiente: "+pendiente.toFixed(2)+" € · Vacaciones: "+vac.toFixed(2)+" € · Pagas extra: "+extras.toFixed(2)+" €.";
+document.getElementById("resultado").style.display="block";
+}
+</script>
+</body>
+</html>
