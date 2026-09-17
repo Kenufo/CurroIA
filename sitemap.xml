@@ -13,4 +13,16 @@
 <priority>0.9</priority>
 </url>
 
+<url>
+<loc>https://kenufo.github.io/CurroIA/calculadora-finiquito/</loc>
+<changefreq>weekly</changefreq>
+<priority>0.9</priority>
+</url>
+
+<url>
+<loc>https://kenufo.github.io/CurroIA/calculadora-vacaciones/</loc>
+<changefreq>weekly</changefreq>
+<priority>0.9</priority>
+</url>
+
 </urlset>
