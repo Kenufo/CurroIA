@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Calculadora de sueldo neto | CurroIA</title>
+<meta name="description" content="Calcula tu sueldo neto en España de forma orientativa y gratuita.">
+<style>
+body{font-family:Arial;margin:0;background:#f4f7fb;color:#172033}
+header{background:#173b6c;color:white;text-align:center;padding:25px}
+main{max-width:700px;margin:25px auto;padding:15px}
+.card{background:white;padding:22px;border-radius:15px;margin-bottom:20px}
+input,select,button{width:100%;box-sizing:border-box;padding:13px;margin:8px 0 15px;border-radius:8px;border:1px solid #ccc;font-size:16px}
+button{background:#1769d1;color:white;border:0;font-weight:bold}
+#resultado{display:none;background:#eef6ff;padding:18px;border-radius:10px}
+.grande{font-size:30px;font-weight:bold;color:#1769d1}
+a{color:#1769d1}
+</style>
+</head>
+<body>
+<header><h1>CurroIA</h1><p>Calculadora de sueldo neto en España</p></header>
+<main>
+<div class="card">
+<h2>¿Cuánto cobrarás realmente?</h2>
+<p>Introduce tu salario bruto anual y calcula una estimación de tu sueldo neto.</p>
+<label>Salario bruto anual (€)</label>
+<input id="bruto" type="number" placeholder="Ej. 28000">
+<label>Número de pagas</label>
+<select id="pagas"><option>12</option><option>14</option></select>
+<label>IRPF (%)</label>
+<input id="irpf" type="number" value="10" step="0.1">
+<button onclick="calcular()">CALCULAR SUELDO NETO</button>
+<div id="resultado">
+<p>Sueldo neto mensual estimado:</p>
+<div class="grande" id="neto"></div>
+<p id="detalle"></p>
+</div>
+</div>
+<div class="card">
+<h2>¿Cómo funciona?</h2>
+<p>El sueldo neto se obtiene descontando del salario bruto las cotizaciones a la Seguridad Social y la retención del IRPF.</p>
+<p>El resultado es orientativo y puede variar según tu situación personal y laboral.</p>
+</div>
+<div class="card">
+<h2>CurroIA</h2>
+<p><a href="../">← Volver a CurroIA</a></p>
+<p><a href="../privacidad.html">Política de privacidad</a></p>
+</div>
+</main>
+<script>
+function calcular(){
+let b=Number(document.getElementById("bruto").value);
+let p=Number(document.getElementById("pagas").value);
+let i=Number(document.getElementById("irpf").value);
+if(!b){alert("Introduce tu salario bruto anual.");return}
+let ss=b*.0635;
+let irpf=b*i/100;
+let neto=(b-ss-irpf)/p;
+document.getElementById("neto").textContent=neto.toLocaleString("es-ES",{style:"currency",currency:"EUR"});
+document.getElementById("detalle").textContent="Bruto mensual: "+(b/p).toLocaleString("es-ES",{style:"currency",currency:"EUR"})+" · SS e IRPF estimados.";
+document.getElementById("resultado").style.display="block";
+}
+</script>
+</body>
+</html>
